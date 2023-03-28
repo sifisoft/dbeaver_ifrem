@@ -1,0 +1,35 @@
+{
+	"folders": {},
+	"connections": {
+		"oracle_thin-18729d3c3d1-41384487756a3ae2": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "ifrem",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "2851",
+				"database": "ora12",
+				"url": "jdbc:oracle:thin:@//localhost:2851/ora12",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}

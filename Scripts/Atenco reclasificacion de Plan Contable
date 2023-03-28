@@ -1,0 +1,103 @@
+
+
+
+select PO_EMPRESA, :planDestino, PO_EJERCICIO, PO_ASIENTO, PO_STATUS, PO_SERVICIO, PO_EJERCICIO_PAGADO, PO_TIPO_POLIZA, PO_RECIBO, PO_NUM_PAGO, PO_EMISION 
+from inPolizas
+where po_empresa = :empresa and po_plan = 'B' and  exists (
+    select 1
+    from inRecibo
+    where re_empresa = po_empresa
+        and re_recibo = po_recibo
+        and re_fecha_pago >= '01-jan-22'
+)
+
+
+
+insert into inPolizas
+select PO_EMPRESA, :planDestino, PO_EJERCICIO, PO_ASIENTO, PO_STATUS, PO_SERVICIO, PO_EJERCICIO_PAGADO, PO_TIPO_POLIZA, PO_RECIBO, PO_NUM_PAGO, PO_EMISION 
+from inPolizas
+where po_empresa = :empresa and po_plan = 'B' and  exists (
+    select 1
+    from inRecibo
+    where re_empresa = po_empresa
+        and re_recibo = po_recibo
+        and re_fecha_pago >= '01-jan-22'
+);
+
+
+
+
+update inDiario
+set di_plan = :planDestino
+where di_empresa = :empresa and di_plan = 'B' and exists (
+    select 1
+    from inRecibo
+    where re_empresa = di_empresa
+        and re_recibo = di_recibo
+        and re_fecha_pago >= '01-jan-22'
+);
+
+
+
+delete from inPolizas
+where po_empresa = :empresa and po_plan = 'B' and  exists ( 
+    select 1
+    from inRecibo
+    where re_empresa = po_empresa
+        and re_recibo = po_recibo
+        and re_fecha_pago >= '01-jan-22'
+);
+
+
+
+
+
+
+select *
+from inDiario
+where di_empresa = 7 and di_recibo in (
+    select re_recibo
+    from inRecibo
+    where re_empresa = 7 and re_folio in (
+    '202019',
+    '202022',
+    '202053',
+    '202054',
+    '202056',
+    '202057',
+    '202058',
+    '202059',
+    '202060',
+    '202061',
+    '202062'
+    )
+)
+
+
+
+update inRecibo
+set re_serie = 'A'
+where re_empresa = 7 and re_folio in (
+'202019',
+'202022',
+'202053',
+'202054',
+'202056',
+'202057',
+'202058',
+'202059',
+'202060',
+'202061',
+'202062'
+)
+
+
+
+
+
+select re_serie, count(*)
+from inRecibo
+where re_empresa = :empresa and trunc(re_fecha_pago) >= '01-jan-23' and re_status = 'A'
+group by re_serie;
+
+
