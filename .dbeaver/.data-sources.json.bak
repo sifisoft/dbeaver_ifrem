@@ -12,7 +12,7 @@
 				"database": "ora12",
 				"url": "jdbc:oracle:thin:@//localhost:2851/ora12",
 				"configurationType": "MANUAL",
-				"type": "prod",
+				"type": "dev",
 				"provider-properties": {
 					"@dbeaver-connection-type@": "BASIC",
 					"@dbeaver-sid-service@": "SERVICE"
@@ -22,14 +22,14 @@
 		}
 	},
 	"connection-types": {
-		"prod": {
-			"name": "Production",
-			"color": "0,64,128",
-			"description": "Production database",
-			"auto-commit": false,
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
 			"confirm-execute": false,
-			"confirm-data-change": true,
-			"auto-close-transactions": true
+			"confirm-data-change": false,
+			"auto-close-transactions": false
 		}
 	}
 }
